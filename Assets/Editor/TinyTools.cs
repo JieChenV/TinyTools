@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System.Reflection;
+using System;
+using System.Linq;
 
 public class TinyTools : EditorWindow
 {
@@ -10,7 +13,8 @@ public class TinyTools : EditorWindow
     private bool mouseUp;
     private bool isFreeAreaToggled;
     private bool isAreaScreenshot = true;
-    
+
+    private List<MemberInfo> _customizedMemberInfo = new List<MemberInfo>();
 
     [MenuItem("Tools/TinyTools")]
     public static void Init() {
@@ -21,6 +25,47 @@ public class TinyTools : EditorWindow
     {
         GUILayout.Label("Screenshot", EditorStyles.boldLabel);
         FullScreenshot();
+
+        foreach(MemberInfo member in _customizedMemberInfo)
+        {
+            GUILayout.Label($"{member.Name} - {member.ReflectedType}");
+
+            if(member.MemberType == MemberTypes.Field)
+            {
+                FieldInfo fieldInfo = (FieldInfo)member;
+
+                //object obj = fieldInfo.GetValue(null);
+
+                //Debug.Log($"{obj.ToString()}");
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+        foreach(Assembly assembly in assemblies)
+        {
+            Type[] types = assembly.GetTypes();
+            foreach(Type type in types)
+            {
+                BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+
+                MemberInfo[] members = type.GetMembers(flags);
+
+                foreach(MemberInfo member in members) {
+                    if(member.CustomAttributes.ToArray().Length > 0)
+                    {
+                        TexturePreviewAttribute texturePreviewAttribute = member.GetCustomAttribute<TexturePreviewAttribute>();
+                        if (texturePreviewAttribute != null) {
+                            _customizedMemberInfo.Add(member);
+                        }
+                    }
+                }
+
+            }
+        }
     }
 
 
