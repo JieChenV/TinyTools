@@ -34,6 +34,7 @@ public class TinyTools : EditorWindow
             {
                 FieldInfo fieldInfo = (FieldInfo)member;
 
+                // this is not working the field has to be static or the GetValue() parameter cannot be null
                 //object obj = fieldInfo.GetValue(null);
 
                 //Debug.Log($"{obj.ToString()}");
