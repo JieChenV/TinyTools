@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class TexturePreviewAttribute : Attribute
 {
-    int previewSize = 40;
+    int previewWidth = 40;
+    int previewHeight = 40;
 
-    public TexturePreviewAttribute(int size = 40) {
-        this.previewSize = size;
+    public TexturePreviewAttribute(int width, int height  ) {
+        this.previewWidth = width;
+        this.previewHeight = height;
     }
+
+    public TexturePreviewAttribute() { }
 }
