@@ -3,15 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TexturePreviewAttribute : Attribute
+namespace TinyTools.Editor
 {
-    int previewWidth = 40;
-    int previewHeight = 40;
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class TexturePreviewAttribute : PropertyAttribute
+    {
+        public const int DefaultWidth = 40;
+        public const int DefaultHeight = 40;
+        public int PreviewWidth { get; set; }
+        public int PreviewHeight { get; set; }
 
-    public TexturePreviewAttribute(int width, int height  ) {
-        this.previewWidth = width;
-        this.previewHeight = height;
+        public TexturePreviewAttribute(int width, int height)
+        {
+            this.PreviewWidth = width;
+            this.PreviewHeight = height;
+        }
+
+        public TexturePreviewAttribute() { }
     }
 
-    public TexturePreviewAttribute() { }
 }
+
