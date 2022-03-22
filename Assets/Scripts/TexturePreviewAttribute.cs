@@ -19,7 +19,10 @@ namespace TinyTools.Editor
             this.PreviewHeight = height;
         }
 
-        public TexturePreviewAttribute() { }
+        public TexturePreviewAttribute() {
+            this.PreviewWidth = DefaultWidth;
+            this.PreviewHeight = DefaultHeight;
+        }
     }
 
 }

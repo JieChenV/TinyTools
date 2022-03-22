@@ -12,15 +12,17 @@ namespace TinyTools.Editor
 
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            return 100;
+            return GetAssetPreviewSize(property).x + EditorGUIUtility.singleLineHeight;
         }
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(rect, label, property);
 
+            // check the property
             if (property.propertyType == SerializedPropertyType.ObjectReference)
             {
+                // 1. draw the default label
                 Rect propertyRect = new Rect()
                 {
                     x = rect.x,
@@ -31,6 +33,8 @@ namespace TinyTools.Editor
 
                 EditorGUI.PropertyField(propertyRect, property, label);
 
+
+                // 2. draw the preview
                 Texture2D previewTexture = GetAssetPreview(property);
                 if (previewTexture != null)
                 {
@@ -38,7 +42,7 @@ namespace TinyTools.Editor
                     {
                         x = rect.x + EditorGUIUtility.singleLineHeight,
                         y = rect.y + EditorGUIUtility.singleLineHeight,
-                        width = rect.width,
+                        width = GetAssetPreviewSize(property).x,
                         height = GetAssetPreviewSize(property).y
                     };
 
@@ -48,6 +52,7 @@ namespace TinyTools.Editor
             else
             {
                 string message = property.name + " doesn't have an asset preview";
+                EditorGUI.HelpBox(rect, message, MessageType.Info);
             }
 
             EditorGUI.EndProperty();
@@ -59,7 +64,7 @@ namespace TinyTools.Editor
             {
                 if (property.objectReferenceValue != null)
                 {
-                    Texture2D previewTexture = AssetPreview.GetAssetPreview(property.objectReferenceValue);
+                    Texture2D previewTexture = (Texture2D)property.objectReferenceValue; //  AssetPreview.GetAssetPreview(property.objectReferenceValue);
                     return previewTexture;
                 }
 

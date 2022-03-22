@@ -6,8 +6,14 @@ using TinyTools.Editor;
 
 public class TexturePreviewExample : MonoBehaviour
 {
-    [TexturePreview(90,90)]
-    public Texture2D TestTexture;
+    [TexturePreview(128,128)]
+    public Texture2D CustomizedPreviewTex;
+
+    [TexturePreview]
+    public Texture2D DefaultPreviewTex;
+
+    [SerializeField]
+    public int TestInt;
 
     // Start is called before the first frame update
     void Start()
