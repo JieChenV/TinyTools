@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-public class TexturePreviewEditor : Editor
+namespace TinyTools.Editor
 {
-    
+    public class TexturePreviewEditor : UnityEditor.Editor
+    {
+
+    }
 }
