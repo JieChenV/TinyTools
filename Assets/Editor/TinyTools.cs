@@ -28,21 +28,9 @@ namespace TinyTools.Editor
         {
             GUILayout.Label("Screenshot", EditorStyles.boldLabel);
             FullScreenshot();
-
-            foreach (MemberInfo member in _customizedMemberInfo)
-            {
-                GUILayout.Label($"{member.Name} - {member.ReflectedType}");
-
-                if (member.MemberType == MemberTypes.Field)
-                {
-                    FieldInfo fieldInfo = (FieldInfo)member;
-
-                    // this is not working the field has to be static or the GetValue() parameter cannot be null
-                    //object obj = fieldInfo.GetValue(null);
-
-                    //Debug.Log($"{obj.ToString()}");
-                }
-            }
+            GUILayout.Space(50);
+            GUILayout.Label("Monitor Resolution: " + Screen.currentResolution);
+            GUILayout.Label("Camera's Resolution: " + Camera.main.pixelRect.width + " x " + Camera.main.pixelRect.height);
         }
 
         private void OnEnable()
@@ -80,13 +68,18 @@ namespace TinyTools.Editor
         /// </summary>
         private void FullScreenshot()
         {
-            if (GUILayout.Button("Full Screenshot", GUILayout.MaxWidth(200), GUILayout.Height(30)))
+            GUILayout.BeginArea(new Rect((Screen.width / 2) - 50, 30, 100, 100));
+
+            if (GUILayout.Button("Full Screenshot", GUILayout.MaxWidth(100), GUILayout.Height(30)))
             {
                 System.IO.Directory.CreateDirectory("Screenshots");
                 string imageName = System.DateTime.Now.ToString("Mddhhmmss") + ".png";
                 ScreenCapture.CaptureScreenshot("Screenshots/" + imageName);
                 Debug.Log("Full game scene screenshot " + imageName + " has been saved in Screenshots folder.");
             }
+
+            GUILayout.EndArea();
+
         }
 
         /// <summary>
