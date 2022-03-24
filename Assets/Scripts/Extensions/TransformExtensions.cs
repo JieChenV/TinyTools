@@ -93,6 +93,30 @@ namespace TinyTools.Extensions
         }
 
         /// <summary>
+        /// Set localScale's x only
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="y"> y value </param>
+        /// <returns> new localScale </returns>
+        public static Vector3 SetLocalScaleY(this Transform t, float y)
+        {
+            t.localScale = t.localScale.SetY(y);
+            return t.localScale;
+        }
+
+        /// <summary>
+        /// Set localScale's x only
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="z"> z value </param>
+        /// <returns> new localScale </returns>
+        public static Vector3 SetLocalScaleZ(this Transform t, float z)
+        {
+            t.localScale = t.localScale.SetZ(z);
+            return t.localScale;
+        }
+
+        /// <summary>
         /// Flip localScale around X axis 
         /// </summary>
         /// <param name="t"></param>
