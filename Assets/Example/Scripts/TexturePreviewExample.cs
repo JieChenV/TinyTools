@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TinyTools.Extensions;
-using TinyTools.Editor;
+using TinyTools.Attributes;
 
 namespace TinyTools.Examples {
     public class TexturePreviewExample : MonoBehaviour
