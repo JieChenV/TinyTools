@@ -14,14 +14,6 @@ namespace TinyTools.Examples
 
         public int Armor;
 
-        private void Start()
-        {
-            TinyDebug.LogRed("LogRed Test");
-            TinyDebug.Log("Log with Hex color test", "#265415");
-            TinyDebug.Log("Log with Built-in color test", Color.green);
-            TinyDebug.LogBold("LogBold with Hex color test", "#265415");
-            TinyDebug.LogBold("LogBold with Built-in color test", Color.green);
-        }
     }
 }
 
